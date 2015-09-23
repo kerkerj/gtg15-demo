@@ -1,0 +1,108 @@
+{
+	"version": 0,
+	"dependencies": [
+		{
+			"importpath": "git.eclipse.org/gitroot/paho/org.eclipse.paho.mqtt.golang.git",
+			"repository": "https://git.eclipse.org/gitroot/paho/org.eclipse.paho.mqtt.golang.git",
+			"revision": "0d95fb886332902c477408b4b554667f65d01605",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/bmizerany/pat",
+			"repository": "https://github.com/bmizerany/pat",
+			"revision": "b8a35001b773c267eb260a691f4e5499a3531600",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/codegangsta/cli",
+			"repository": "https://github.com/codegangsta/cli",
+			"revision": "a65b733b303f0055f8d324d805f393cd3e7a7904",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/d4l3k/go-pry",
+			"repository": "https://github.com/d4l3k/go-pry",
+			"revision": "3e1eff5e7dc28118238720f1a55b47997001a996",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/donovanhide/eventsource",
+			"repository": "https://github.com/donovanhide/eventsource",
+			"revision": "07d0bc84fdf1ae5d5e27b2fe216d6e3af053c295",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/hybridgroup/go-ardrone/client",
+			"repository": "https://github.com/hybridgroup/go-ardrone",
+			"revision": "b9750d8d7b78f9638e5fdd899835e99d46b5a56c",
+			"branch": "master",
+			"path": "/client"
+		},
+		{
+			"importpath": "github.com/hybridgroup/go-opencv/opencv",
+			"repository": "https://github.com/hybridgroup/go-opencv",
+			"revision": "3ccc83e7f6323198455839c54d612d6933d19a0e",
+			"branch": "master",
+			"path": "/opencv"
+		},
+		{
+			"importpath": "github.com/hybridgroup/go-sdl2/sdl",
+			"repository": "https://github.com/hybridgroup/go-sdl2",
+			"revision": "a77ec98ac8546487885ab808e39175310d80302e",
+			"branch": "master",
+			"path": "/sdl"
+		},
+		{
+			"importpath": "github.com/hybridgroup/gobot",
+			"repository": "https://github.com/hybridgroup/gobot",
+			"revision": "f6830ebcb3822790dcf688fd0800371a5d1b547f",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/mgutz/ansi",
+			"repository": "https://github.com/mgutz/ansi",
+			"revision": "c286dcecd19ff979eeb73ea444e479b903f2cfcb",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/pborman/uuid",
+			"repository": "https://github.com/pborman/uuid",
+			"revision": "cccd189d45f7ac3368a0d127efb7f4d08ae0b655",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/tarm/goserial",
+			"repository": "https://github.com/tarm/goserial",
+			"revision": "8e7ad0efbead3dec997247de0e0cba47c10bfcab",
+			"branch": "master"
+		},
+		{
+			"importpath": "golang.org/x/net/websocket",
+			"repository": "https://go.googlesource.com/net",
+			"revision": "db8e4de5b2d6653f66aea53094624468caad15d2",
+			"branch": "master",
+			"path": "/websocket"
+		},
+		{
+			"importpath": "golang.org/x/tools/go/exact",
+			"repository": "https://go.googlesource.com/tools",
+			"revision": "5a90b2958f12ca0f046ffe2eb1523c5896af5dae",
+			"branch": "master",
+			"path": "/go/exact"
+		},
+		{
+			"importpath": "golang.org/x/tools/go/gcimporter",
+			"repository": "https://go.googlesource.com/tools",
+			"revision": "5a90b2958f12ca0f046ffe2eb1523c5896af5dae",
+			"branch": "master",
+			"path": "/go/gcimporter"
+		},
+		{
+			"importpath": "golang.org/x/tools/go/types",
+			"repository": "https://go.googlesource.com/tools",
+			"revision": "5a90b2958f12ca0f046ffe2eb1523c5896af5dae",
+			"branch": "master",
+			"path": "/go/types"
+		}
+	]
+}
