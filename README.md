@@ -2,7 +2,14 @@
 
 This demo project use [gb](https://github.com/constabulary/gb) to manage third-party libraries.
 
-Demo Used libs:
+To run this demo, you must have a sphero :P
+
+```
+$ cd $PROJECT/bin/
+$ PORT="/dev/xxxx.sphero" ./sphero
+```
+
+Used libraries:
 
 gobot [https://github.com/hybridgroup/gobot](https://github.com/hybridgroup/gobot)
 
