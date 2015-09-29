@@ -1,5 +1,6 @@
 # gtg15-demo
 
+This demo project use [gb](https://github.com/constabulary/gb) to manage third-party libraries.
 
 Demo Used libs:
 
