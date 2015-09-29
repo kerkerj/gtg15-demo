@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GTG15-demo</title>
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/css/bootstrap-switch.css">
+  <link rel="stylesheet" href="./assets/css/jquery.lcnCircleRangeSelect.min.css">
+  <style>
+    body {
+      padding-top: 50px;
+    }
+    .starter-template {
+      padding: 40px 15px;
+    }
+
+    .center{
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Demo</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="starter-template">
+      <div class="stabilization">
+        <h2>Set Sphero's stabilization:</h2>
+        <div class="center">
+          <input id="stabilization-checkbox" type="checkbox" name="stabilization-checkbox" onchange="set_stable(this)">
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="rgb">
+        <h2>Change Sphero's color:</h2>
+        <div class="center">
+          <input id="colorinput" type="color">
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="backled">
+        <h2>Change Sphero's back LED level:</h2>
+        <div class="center">
+          <form class="form set-back-led-level" oninput="amount.value=rangeInput.value">
+            <div class="form-group">
+              <input id="back-led-level" type="range" name="rangeInput" min="0" max="255" value="0" step="1" onchange="set_backled()">
+              <output name="amount" for="back-led-level">0</output>
+            </div>
+        	</form>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="heading">
+        <h2>Set Sphero's heading:</h2>
+        <div class="center">
+          <form class="form set-heading" oninput="amount.value=rangeInput.value">
+            <div class="form-group">
+              <!-- <input id="heading-level" type="range" name="rangeInput" min="0" max="360" value="0" step="1"> -->
+              <input id="heading-level" type="text" min="0" max="360" value="0" step="1" class="circle-range-select" data-auto-init data-single-value>
+            </div>
+        	</form>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="roll">
+        <h2>Rolling Range</h2>
+        <div class="center">
+          <form class="form set-rolling-range" oninput="amount.value=rangeInput.value">
+            <div class="form-group">
+              <input id="rangeInput" type="range" name="rangeInput" min="0" max="60" value="15" step="5">
+              <output name="amount" for="rangeInput">15</output>
+            </div>
+        	</form>
+
+          <button id="btn-left" class="btn btn-info" onclick="roll(90)">Left</button>
+          <button id="btn-up" class="btn btn-info" onclick="roll(0)">Up</button>
+          <button id="btn-down" class="btn btn-info" onclick="roll(180)">Down</button>
+          <button id="btn-right" class="btn btn-info" onclick="roll(270)">Right</button>
+        </div>
+      </div>
+
+      <hr>
+    </div>
+
+  </div><!-- /.container -->
+
+  <script src="./assets/js/jquery-1.11.3.min.js"></script>
+  <script src="./assets/js/bootstrap.min.js"></script>
+  <script src="./assets/js/bootstrap-switch.min.js"></script>
+  <script src="./assets/js/jquery.lcnCircleRangeSelect.min.js"></script>
+
+  <script>
+    // Stabilization -------------------------------------------
+    $("#stabilization-checkbox").bootstrapSwitch();
+    var set_stable = function() {
+      var checked = $("#stabilization-checkbox").bootstrapSwitch('state');
+
+      $.ajax({
+        url: "/stable/" + checked,
+        complete: function(result) {
+          console.log(result);
+        }
+      });
+    };
+
+    // Set back LED --------------------------------------------
+    var set_backled = function() {
+      var level = $("#back-led-level").val();
+
+      $.ajax({
+        url: "/backled/" + level,
+        complete: function(result) {
+          console.log(result);
+        }
+      });
+    };
+
+    // Set heading level ---------------------------------------
+    $('#heading-level').on('change', function() {
+      var level = $(this).val();
+
+      // TODO roll did not set heading, try SetHeading
+      roll(level, 0);
+      console.log(level);
+    });
+
+    // Roll ----------------------------------------------------
+    $(window).keydown(function(e) {
+      var arrow = "";
+      var degree = 0;
+
+      switch(e.keyCode) {
+        case 37:
+          arrow = "left";
+          degree = 90;
+          break;
+        case 38:
+          arrow = "up";
+          degree = 180;
+          break;
+        case 39:
+          arrow = "right";
+          degree = 270;
+          break;
+        case 40:
+          arrow = "down";
+          degree = 0;
+          break;
+      }
+
+      if (arrow !== "") {
+        roll(degree, $("#rangeInput").val());
+      }
+    });
+
+    var roll = function(degree, rolling_range) {
+      if (rolling_range == null) {
+        rolling_range = 0;
+      }
+
+      console.log("Rolling, degree=" + degree + ", range=" + rolling_range);
+
+      $.ajax({
+        url: "/roll/" + rolling_range + "/head/" + degree,
+        complete: function(result) {
+          console.log(result);
+        }
+      })
+    };
+
+    // RGB -----------------------------------------------------
+    var hexToRgb = function(hex) {
+      // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+      var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+      hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+          return r + r + g + g + b + b;
+      });
+
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+      } : null;
+    };
+
+    $('#colorinput').on('input', function() {
+      var color_hex = $(this).val();
+      var color_rgb = hexToRgb(color_hex);
+      console.log("RGB: " + color_rgb.r + "," + color_rgb.g + "," + color_rgb.b);
+
+      $.ajax({
+        url: "/rgb/" + color_rgb.r + "," + color_rgb.g + "," + color_rgb.b,
+        complete: function(result) {
+          console.log(result);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

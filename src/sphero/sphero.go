@@ -13,6 +13,11 @@ type Sphero interface {
 	Start()
 	Stop()
 	SetRGB(r, g, b uint8)
+  SetStabilization(b bool)
+  SetBackLED(level uint8)
+  SetHeading(heading uint16)
+  Roll(speed uint8, heading uint16)
+  SetRotationRate(level uint8)
 }
 
 type s_robot struct {
@@ -46,4 +51,24 @@ func (s *s_robot) Stop() {
 
 func (s *s_robot) SetRGB(r, g, b uint8) {
 	s.device.SetRGB(r, g, b)
+}
+
+func (s *s_robot) SetStabilization(b bool) {
+  s.device.SetStabilization(b)
+}
+
+func (s *s_robot) SetBackLED(level uint8) {
+  s.device.SetBackLED(level)
+}
+
+func (s *s_robot) SetHeading(heading uint16) {
+  s.device.SetHeading(heading)
+}
+
+func (s *s_robot) Roll(speed uint8, heading uint16) {
+  s.device.Roll(speed, heading)
+}
+
+func (s *s_robot) SetRotationRate(level uint8) {
+  s.device.SetRotationRate(level)
 }
