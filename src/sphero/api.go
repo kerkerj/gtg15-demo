@@ -8,7 +8,7 @@ import (
 	"github.com/labstack/echo"
 	mw "github.com/labstack/echo/middleware"
 
-  "github.com/thoas/stats"
+	"github.com/thoas/stats"
 )
 
 func NewApi(sphero Sphero) Api {
@@ -31,10 +31,10 @@ func (api *ApiEcho) Handler() http.Handler {
 	e.Use(mw.Logger())
 	e.Use(mw.Recover())
 
-  // Serve static files
+	// Serve static files
 	e.Static("/", "./public")
 
-  // stats https://github.com/thoas/stats
+	// stats https://github.com/thoas/stats
 	s := stats.New()
 	e.Use(s.Handler)
 	e.Get("/stats", func(c *echo.Context) error {
@@ -53,8 +53,8 @@ func (api *ApiEcho) Handler() http.Handler {
 	e.Get("/heading/:heading", headingHandler(api))
 	// Roll
 	e.Get("/roll/:speed/head/:heading", rollHandler(api))
-  // SetRotationRate
-  e.Get("/rotate_rate/:level", rotationRateHandler(api))
+	// SetRotationRate
+	e.Get("/rotate_rate/:level", rotationRateHandler(api))
 
 	return e
 }
@@ -126,11 +126,11 @@ func headingHandler(api *ApiEcho) echo.HandlerFunc {
 
 func rollHandler(api *ApiEcho) echo.HandlerFunc {
 	return func(c *echo.Context) error {
-    speed, _ := strconv.Atoi(c.Param("speed"))
-    heading, _ := strconv.Atoi(c.Param("heading"))
+		speed, _ := strconv.Atoi(c.Param("speed"))
+		heading, _ := strconv.Atoi(c.Param("heading"))
 
-    api.s.Roll(uint8(speed), uint16(heading))
-    return c.String(http.StatusOK, "success")
+		api.s.Roll(uint8(speed), uint16(heading))
+		return c.String(http.StatusOK, "success")
 	}
 }
 
