@@ -102,8 +102,8 @@
         	</form>
 
           <button id="btn-left" class="btn btn-info" onclick="roll(90)">Left</button>
-          <button id="btn-up" class="btn btn-info" onclick="roll(0)">Up</button>
-          <button id="btn-down" class="btn btn-info" onclick="roll(180)">Down</button>
+          <button id="btn-up" class="btn btn-info" onclick="roll(180)">Up</button>
+          <button id="btn-down" class="btn btn-info" onclick="roll(0)">Down</button>
           <button id="btn-right" class="btn btn-info" onclick="roll(270)">Right</button>
         </div>
       </div>
@@ -184,7 +184,7 @@
 
     var roll = function(degree, rolling_range) {
       if (rolling_range == null) {
-        rolling_range = 0;
+        rolling_range = $("#rangeInput").val();
       }
 
       console.log("Rolling, degree=" + degree + ", range=" + rolling_range);
